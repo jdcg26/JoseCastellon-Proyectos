@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Medicamentos - Farmacia LPC</title>
+    <link rel="icon" href="imagenes/favicon.png"> 
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .banner-catalogo {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x400?text=Catálogo+de+Medicamentos');
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            color: #3b5998;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #3b5998;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #666;
+        }
+        
+        .productos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .producto-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .producto-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .producto-img-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .producto-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .producto-img-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .img-zoom-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(59, 89, 152, 0.8);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .producto-img-container:hover .img-zoom-icon {
+            opacity: 1;
+        }
+        
+        .producto-info {
+            padding: 20px;
+        }
+        
+        .categoria-badge {
+            display: inline-block;
+            background-color: #f0f2f5;
+            color: #3b5998;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .producto-info h3 {
+            color: #3b5998;
+            margin-bottom: 10px;
+        }
+        
+        .precio {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0;
+        }
+        
+        .btn-comprar {
+            width: 100%;
+            background-color: #3b5998;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-comprar:hover {
+            background-color: #2d4373;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background-color: #f0f2f5;
+            margin: 50px 0;
+            position: relative;
+        }
+        
+        .ver-mas {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .ver-mas a {
+            display: inline-block;
+            color: #3b5998;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #3b5998;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .ver-mas a:hover {
+            background-color: #3b5998;
+            color: white;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background-color: #f0f2f5;
+            color: #3b5998;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .category-tab:hover, .category-tab.active {
+            background-color: #3b5998;
+            color: white;
+        }
+        
+        /* Estilos para el lightbox */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        #lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #lightbox-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        #lightbox-img {
+            display: block;
+            max-width: 100%;
+            max-height: calc(80vh - 60px);
+            margin: 0 auto;
+        }
+        
+        #lightbox-caption {
+            padding: 10px;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        #lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #3b5998;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        #lightbox-close:hover {
+            background-color: #f0f2f5;
+        }
+        
+        #lightbox-prev, #lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: white;
+            background-color: rgba(59, 89, 152, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #lightbox-prev {
+            left: 20px;
+        }
+        
+        #lightbox-next {
+            right: 20px;
+        }
+        
+        #lightbox-prev:hover, #lightbox-next:hover {
+            background-color: rgba(59, 89, 152, 1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Farmacia LPC</div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="catalogo.html" class="active"><i class="fas fa-pills"></i> Catálogo</a></li>
+                    <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="banner-catalogo">
+            <div class="banner-content">
+                <h1>Catálogo de Medicamentos</h1>
+                <p>Encuentra lo que necesitas para tu salud</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="category-tabs">
+                <div class="category-tab active" onclick="scrollToSection('medicamentos-receta')">Medicamentos con Receta</div>
+                <div class="category-tab" onclick="scrollToSection('medicamentos-venta-libre')">Medicamentos de Venta Libre</div>
+                <div class="category-tab" onclick="scrollToSection('suplementos-vitaminas')">Suplementos y Vitaminas</div>
+            </div>
+            
+            <section id="medicamentos-receta">
+                <h2 class="section-title">Medicamentos con Receta Médica</h2>
+                <p class="section-description">Estos medicamentos requieren prescripción médica para su venta. Consulte con su médico antes de utilizarlos.</p>
+                
+                <div class="productos-container">
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/amoxicilina.png', 'Amoxicilina 500mg')">
+                            <img src="imagenes/amoxicilina.png" alt="Amoxicilina" data-lightbox="productos" data-title="Amoxicilina 500mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Antibióticos</span>
+                            <h3>Amoxicilina 500mg</h3>
+                            <p>Antibiótico de amplio espectro para tratar infecciones bacterianas.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/enalapril.png', 'Enalapril 10mg')">
+                            <img src="imagenes/enalapril.png" alt="Enalapril" data-lightbox="productos" data-title="Enalapril 10mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Antihipertensivos</span>
+                            <h3>Enalapril 10mg</h3>
+                            <p>Medicamento para el control de la presión arterial alta y la insuficiencia cardíaca.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/metformina.png', 'Metformina 850mg')">
+                            <img src="imagenes/metformina.png" alt="Metformina" data-lightbox="productos" data-title="Metformina 850mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Antidiabéticos</span>
+                            <h3>Metformina 850mg</h3>
+                            <p>Medicamento oral para el tratamiento de la diabetes tipo 2.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ver-mas">
+                    <a href="#" onclick="alert('Visualizando más medicamentos con receta'); return false;">
+                        Ver más medicamentos con receta <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <section id="medicamentos-venta-libre">
+                <h2 class="section-title">Medicamentos de Venta Libre</h2>
+                <p class="section-description">Medicamentos que no requieren receta médica para su compra. Siempre lea las indicaciones antes de usar.</p>
+                
+                <div class="productos-container">
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/paracetamol.png', 'Paracetamol 500mg')">
+                            <img src="imagenes/paracetamol.png" alt="Paracetamol" data-lightbox="productos" data-title="Paracetamol 500mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Analgésicos</span>
+                            <h3>Paracetamol 500mg</h3>
+                            <p>Analgésico y antipirético para aliviar el dolor y reducir la fiebre.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/ibuprofeno.png', 'Ibuprofeno 400mg')">
+                            <img src="imagenes/ibuprofeno.png" alt="Ibuprofeno" data-lightbox="productos" data-title="Ibuprofeno 400mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Analgésicos</span>
+                            <h3>Ibuprofeno 400mg</h3>
+                            <p>Antiinflamatorio no esteroideo para aliviar el dolor e inflamación.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/loratadina.png', 'Loratadina 10mg')">
+                            <img src="imagenes/loratadina.png" alt="Loratadina" data-lightbox="productos" data-title="Loratadina 10mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Antialérgicos</span>
+                            <h3>Loratadina 10mg</h3>
+                            <p>Antihistamínico para aliviar síntomas de alergias como rinitis alérgica.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ver-mas">
+                    <a href="#" onclick="alert('Visualizando más medicamentos de venta libre'); return false;">
+                        Ver más medicamentos de venta libre <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <section id="suplementos-vitaminas">
+                <h2 class="section-title">Suplementos y Vitaminas</h2>
+                <p class="section-description">Suplementos nutricionales y vitaminas para complementar una dieta equilibrada y mantener una buena salud.</p>
+                
+                <div class="productos-container">
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/complejob.png', 'Complejo B')">
+                            <img src="imagenes/complejob.png" alt="Complejo B" data-lightbox="productos" data-title="Complejo B">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Vitaminas</span>
+                            <h3>Complejo B</h3>
+                            <p>Suplemento vitamínico con vitaminas del complejo B para apoyar el metabolismo energético.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/vitaminac.png', 'Vitamina C 1000mg')">
+                            <img src="imagenes/vitaminac.png" alt="Vitamina C" data-lightbox="productos" data-title="Vitamina C 1000mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Vitaminas</span>
+                            <h3>Vitamina C 1000mg</h3>
+                            <p>Suplemento de vitamina C para fortalecer el sistema inmunológico.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto-card">
+                        <div class="producto-img-container" onclick="openLightbox('imagenes/omega3.png', 'Omega 3 1000mg')">
+                            <img src="imagenes/omega3.png" alt="Omega 3" data-lightbox="productos" data-title="Omega 3 1000mg">
+                            <div class="img-zoom-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="producto-info">
+                            <span class="categoria-badge">Suplementos</span>
+                            <h3>Omega 3 1000mg</h3>
+                            <p>Ácidos grasos esenciales para la salud cardiovascular y el funcionamiento cerebral.</p>
+                            <div class="precio">₡₡₡</div>
+                            <button class="btn btn-comprar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ver-mas">
+                    <a href="#" onclick="alert('Visualizando más suplementos y vitaminas'); return false;">
+                        Ver más suplementos y vitaminas <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Farmacia LPC</h3>
+                <p>Su salud es nuestra prioridad</p>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Principal #123, San José, Costa Rica</p>
+                <p><i class="fas fa-phone"></i> 8446 5505</p>
+                <p><i class="fas fa-envelope"></i> jcastellong@farmacialpc.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Enlaces rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="politicas.html">Políticas de privacidad</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Horario de atención</h3>
+                <p>Lunes a Viernes: 8:00 AM - 8:00 PM</p>
+                <p>Sábados: 9:00 AM - 6:00 PM</p>
+                <p>Domingos: 10:00 AM - 2:00 PM</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Síguenos en redes</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="newsletter">
+                    <h4>Suscríbete a nuestro boletín</h4>
+                    <form>
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="submit" class="btn">Suscribir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Farmacia LPC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- HTML para el lightbox -->
+    <div id="lightbox">
+        <div id="lightbox-content">
+            <img id="lightbox-img" src="" alt="Imagen ampliada">
+            <div id="lightbox-caption"></div>
+            <div id="lightbox-close"><i class="fas fa-times"></i></div>
+            <div id="lightbox-prev"><i class="fas fa-chevron-left"></i></div>
+            <div id="lightbox-next"><i class="fas fa-chevron-right"></i></div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.toLowerCase().includes(sectionId.replace(/-/g, ' '))) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            section.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('.btn-comprar').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.producto-card');
+                const nombreProducto = card.querySelector('h3').textContent;
+                alert(nombreProducto + ' ha sido agregado al carrito');
+            });
+        });
+        
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        
+        let currentIndex = 0;
+        const images = [];
+        
+        // Recopilar todas las imágenes y sus títulos
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('[data-lightbox="productos"]').forEach((img, index) => {
+                images.push({
+                    src: img.getAttribute('src'),
+                    title: img.getAttribute('data-title')
+                });
+            });
+        });
+        
+        function openLightbox(src, title) {
+            lightboxImg.src = src;
+            lightboxCaption.textContent = title;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevenir scroll
+            
+            // Encontrar el índice de la imagen actual
+            currentIndex = images.findIndex(img => img.src === src);
+            updateNavButtons();
+        }
+        
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function showPrevImage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                lightboxImg.src = images[currentIndex].src;
+                lightboxCaption.textContent = images[currentIndex].title;
+                updateNavButtons();
+            }
+        }
+        
+        function showNextImage() {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                lightboxImg.src = images[currentIndex].src;
+                lightboxCaption.textContent = images[currentIndex].title;
+                updateNavButtons();
+            }
+        }
+        
+        function updateNavButtons() {
+            // Ocultar/mostrar los botones de navegación según corresponda
+            lightboxPrev.style.display = currentIndex > 0 ? 'flex' : 'none';
+            lightboxNext.style.display = currentIndex < images.length - 1 ? 'flex' : 'none';
+        }
+        
+        // Event listeners
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', showPrevImage);
+        lightboxNext.addEventListener('click', showNextImage);
+        
+        // Cerrar al hacer clic fuera de la imagen
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevImage();
+            } else if (e.key === 'ArrowRight') {
+                showNextImage();
+            }
+        });
+    </script>
+</body>
+</html>
