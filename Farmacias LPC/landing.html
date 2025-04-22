@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal - Farmacia LPC</title>
+    <link rel="icon" href="imagenes/favicon.png"> 
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Añadir FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        header h1 {
+            margin-bottom: 5px;
+        }
+        
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+        
+        .options-grid {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .option-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 250px;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .option-icon {
+            font-size: 3rem;
+            color: #3b5998;
+            margin-bottom: 20px;
+        }
+        
+        .option-info h3 {
+            color: #3b5998;
+            margin-bottom: 15px;
+        }
+        
+        .option-info p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Farmacia LPC</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="options-grid">
+            <div class="option-card">
+                <div class="option-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div class="option-info">
+                    <h3>Sitio Web</h3>
+                    <p>Acceda al portal web de Farmacia LPC</p>
+                    <a href="inicio.html" class="btn"><i class="fas fa-globe"></i> Ir al Sitio</a>
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <div class="option-icon">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <div class="option-info">
+                    <h3>Tour Virtual</h3>
+                    <p>Recorra nuestras instalaciones en 360°</p>
+                    <a href="portada.html" class="btn"><i class="fas fa-street-view"></i> Iniciar Tour</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+  <!-- Footer simplificado con enlaces a páginas principales de Facebook e Instagram -->
+<!-- Footer unificado basado en el de catalogo.html -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>Farmacia LPC</h3>
+            <p>Su salud es nuestra prioridad</p>
+            <p><i class="fas fa-map-marker-alt"></i> Calle Principal #123, San José, Costa Rica</p>
+            <p><i class="fas fa-phone"></i> 8446 5505</p>
+            <p><i class="fas fa-envelope"></i> jcastellong@farmacialpc.com</p>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Enlaces rápidos</h3>
+            <ul class="footer-links">
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="politicas.html">Políticas de privacidad</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Horario de atención</h3>
+            <p>Lunes a Viernes: 8:00 AM - 8:00 PM</p>
+            <p>Sábados: 9:00 AM - 6:00 PM</p>
+            <p>Domingos: 10:00 AM - 2:00 PM</p>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Síguenos en redes</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="newsletter">
+                <h4>Suscríbete a nuestro boletín</h4>
+                <form>
+                    <input type="email" placeholder="Tu correo electrónico">
+                    <button type="submit" class="btn">Suscribir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        <p>© 2025 Farmacia LPC. Todos los derechos reservados.</p>
+    </div>
+</footer>

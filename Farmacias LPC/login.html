@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Farmacia LPC</title>
+    <link rel="icon" href="imagenes/favicon.png"> 
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Añadir FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 400px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            color: #3b5998;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #3b5998;
+            box-shadow: 0 0 8px rgba(59, 89, 152, 0.3);
+            outline: none;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+            padding: 10px;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .success-message {
+            color: #2ecc71;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+            padding: 10px;
+            background-color: rgba(46, 204, 113, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+            text-decoration: none;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #2d4373;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .form-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3b5998;
+            cursor: pointer;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        /* Estilos para las animaciones Lottie */
+        .lottie-container {
+            display: none;
+            justify-content: center;
+            margin-top: 20px;
+            height: 150px;
+            width: 100%;
+        }
+        
+        .lottie-container iframe {
+            border: none;
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video de fondo -->
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="imagenes/videopastillas.mp4" type="video/mp4">
+            Su navegador no soporta la etiqueta de video.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user"></i> Usuario</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Ingrese su usuario">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="Ingrese su contraseña">
+                    <i class="fas fa-eye form-icon" id="togglePassword"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+            
+            <!-- Animación Lottie para éxito -->
+            <div class="lottie-container" id="success-animation">
+                <iframe src="https://lottie.host/embed/f415d262-8d26-4685-b682-1db640b1c9f4/FCO1zTflP7.json"></iframe>
+            </div>
+            
+            <!-- Animación Lottie para error -->
+            <div class="lottie-container" id="error-animation">
+                <iframe src="https://lottie.host/embed/43d982d3-b01e-4680-b25c-6aa4981cdcf6/eKh0Lr295O.json"></iframe>
+            </div>
+            
+            <div class="error-message" id="error-message">Credenciales incorrectas. Por favor, inténtelo de nuevo.</div>
+            <div class="success-message" id="success-message">Inicio de sesión exitoso. Redirigiendo...</div>
+        </form>
+    </div>
+
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver a la página principal</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+            
+            // Login submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const errorMessage = document.getElementById('error-message');
+                const successMessage = document.getElementById('success-message');
+                const successAnimation = document.getElementById('success-animation');
+                const errorAnimation = document.getElementById('error-animation');
+                
+                // Ocultar ambas animaciones primero
+                successAnimation.style.display = 'none';
+                errorAnimation.style.display = 'none';
+                
+                // Validar credenciales
+                if (username === 'cenfo' && password === '123') {
+                    // Ocultar mensaje de error si estaba visible
+                    errorMessage.style.display = 'none';
+                    
+                    // Mostrar mensaje y animación de éxito
+                    successMessage.style.display = 'block';
+                    successAnimation.style.display = 'flex';
+                    
+                    // Redireccionar después de un breve retraso
+                    setTimeout(() => {
+                        window.location.href = 'landing.html';
+                    }, 2500); // Aumentado para ver la animación
+                } else {
+                    // Mostrar mensaje y animación de error
+                    errorMessage.style.display = 'block';
+                    errorAnimation.style.display = 'flex';
+                    
+                    // Ocultar mensaje de éxito si estaba visible
+                    successMessage.style.display = 'none';
+                    
+                    // Se eliminó el código que añadía el efecto de agitación (shake)
+                }
+            });
+        });
+    </script>
+</body>
+</html>
