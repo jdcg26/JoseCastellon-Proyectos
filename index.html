@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio · NeoSalud</title>
+    <link rel="icon" type="image/png" href="img/favicon.jpg" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reglas.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark glassy fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <i class="bi bi-capsule-pill fs-3 neon-text"></i>
+          <span class="fw-bold">NeoSalud</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" href="precios.html">Precios</a></li>
+            <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+            <li class="nav-item ms-lg-3">
+              <a class="btn btn-neon" href="catalogo.pdf" target="_blank">
+                <i class="bi bi-filetype-pdf me-1"></i>Catálogo PDF
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="mt-5 pt-4">
+      <!-- Banner con blobs + divisor existente -->
+      <section
+        class="hero d-flex align-items-center bg-shapes neon-blobs"
+        style="
+          background:
+            linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+            url('img/bannerweb.jpg') center/cover no-repeat;
+        "
+      >
+        <div class="container text-center">
+          <h1 class="display-4 fw-bold lh-1">Farmacia <span class="neon-text">NeoSalud</span></h1>
+          <p class="lead text-white-50 mb-4">
+            Cuidado farmacéutico con <span class="text-white">toque futurista</span>:
+            recetas digitales, asesoría 24/7 y entrega en minutos.
+          </p>
+          <div class="d-flex gap-2 justify-content-center">
+            <a href="productos.html" class="btn btn-neon btn-lg">
+              <i class="bi bi-bag-heart me-1"></i>Comprar
+            </a>
+            <a href="contacto.html#mapa" class="btn btn-outline-light btn-lg">Ubicación</a>
+          </div>
+        </div>
+        <div class="hero-divider"></div>
+      </section>
+
+      <!-- Servicios con franja diagonal -->
+      <section class="py-5 section-clip bg-shapes diagonal-slice">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Servicios <span class="neon-text">Iconográficos</span></h2>
+            <p class="text-white-50">Asesoría, recetas electrónicas y telemedicina.</p>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card card-glass h-100 text-center p-3">
+                <div class="icon-wrap"><i class="bi bi-robot"></i></div>
+                <h5>Asistente IA</h5>
+                <p class="text-white-50">Recomendaciones seguras para OTC y recordatorios de medicación.</p>
+                <a class="stretched-link" href="servicios.html"></a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-glass h-100 text-center p-3">
+                <div class="icon-wrap"><i class="bi bi-file-earmark-medical"></i></div>
+                <h5>Recetas Digitales</h5>
+                <p class="text-white-50">Carga, validación y despacho de recetas con firma digital.</p>
+                <a class="stretched-link" href="servicios.html#acordeon"></a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-glass h-100 text-center p-3">
+                <div class="icon-wrap"><i class="bi bi-truck"></i></div>
+                <h5>Delivery Express</h5>
+                <p class="text-white-50">Cobertura metropolitana en menos de 60 minutos.</p>
+                <a class="stretched-link" href="servicios.html#modal"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galería con hexágono decorativo -->
+      <section class="py-5 bg-darker bg-shapes hex-right">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Galería <span class="neon-text">Fotográfica</span></h2>
+            <p class="text-white-50">Instalaciones, equipo y nuestro laboratorio.</p>
+          </div>
+          <div class="mural-grid">
+            <figure class="photo-card"><img src="img/photo1.jpg" alt="Foto 1" /><figcaption>NeoSalud</figcaption></figure>
+            <figure class="photo-card"><img src="img/photo2.jpg" alt="Foto 2" /><figcaption>NeoSalud</figcaption></figure>
+            <figure class="photo-card"><img src="img/photo3.jpg" alt="Foto 3" /><figcaption>NeoSalud</figcaption></figure>
+            <figure class="photo-card"><img src="img/photo4.jpg" alt="Foto 4" /><figcaption>NeoSalud</figcaption></figure>
+            <figure class="photo-card"><img src="img/photo5.jpg" alt="Foto 5" /><figcaption>NeoSalud</figcaption></figure>
+            <figure class="photo-card"><img src="img/photo6.jpg" alt="Foto 6" /><figcaption>NeoSalud</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Precios con zig-zag inferior -->
+      <section class="py-5 section-clip bg-shapes zigzag-bottom">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Tabla de <span class="neon-text">Precios</span></h2>
+            <p class="text-white-50">Planes de suscripción y beneficios.</p>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="pricing card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Esencial</h5>
+                  <p class="display-6 fw-bold">$9</p>
+                  <ul class="list-unstyled small">
+                    <li><i class="bi bi-check2-circle me-2"></i>Recordatorios</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>Historial digital</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>5% descuento</li>
+                  </ul>
+                  <a class="btn btn-outline-light w-100" href="#">Elegir</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="pricing card h-100 featured">
+                <div class="card-body">
+                  <h5 class="card-title">Plus</h5>
+                  <p class="display-6 fw-bold">$19</p>
+                  <ul class="list-unstyled small">
+                    <li><i class="bi bi-check2-circle me-2"></i>Entrega prioritaria</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>Asesor farmacéutico</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>10% descuento</li>
+                  </ul>
+                  <a class="btn btn-neon w-100" href="#">Elegir</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="pricing card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Familiar</h5>
+                  <p class="display-6 fw-bold">$29</p>
+                  <ul class="list-unstyled small">
+                    <li><i class="bi bi-check2-circle me-2"></i>Hasta 5 perfiles</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>Teleconsulta</li>
+                    <li><i class="bi bi-check2-circle me-2"></i>15% descuento</li>
+                  </ul>
+                  <a class="btn btn-outline-light w-100" href="#">Elegir</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video -->
+      <section class="py-5 bg-darker" id="video">
+        <div class="container">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+              <h3 class="fw-bold">Video publicitario</h3>
+              <p class="text-white-50">Conoce cómo NeoSalud te acompaña con tecnología y atención humana.</p>
+              <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalVideo">
+                <i class="bi bi-play-circle me-1"></i> Ver video
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <div class="ratio ratio-16x9 rounded overflow-hidden shadow">
+                <iframe src="https://www.youtube.com/embed/paB4xjDbr7w" title="Video NeoSalud" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal Video -->
+      <div class="modal fade" id="modalVideo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content glassy">
+            <div class="modal-header border-secondary">
+              <h5 class="modal-title">NeoSalud en 60 segundos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/paB4xjDbr7w" title="Video NeoSalud" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-5 mt-5 border-top border-secondary-subtle position-relative">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <h5 class="text-white-50">NeoSalud Farmacia</h5>
+            <p class="small text-white-50">Tecnología y salud en un mismo lugar. Productos certificados, recetas digitales y entrega express.</p>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-white-50">Navegación</h6>
+            <ul class="list-unstyled small">
+              <li><a class="link-light link-opacity-75" href="productos.html">Productos</a></li>
+              <li><a class="link-light link-opacity-75" href="servicios.html">Servicios</a></li>
+              <li><a class="link-light link-opacity-75" href="precios.html">Precios</a></li>
+              <li><a class="link-light link-opacity-75" href="galeria.html">Galería</a></li>
+              <li><a class="link-light link-opacity-75" href="blog.html">Blog</a></li>
+              <li><a class="link-light link-opacity-75" href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-white-50 mb-2">Síguenos</h6>
+            <a class="btn btn-outline-light btn-sm me-2" href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a class="btn btn-outline-light btn-sm me-2" href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a class="btn btn-outline-light btn-sm" href="https://tiktok.com" target="_blank"><i class="bi bi-tiktok"></i></a>
+          </div>
+        </div>
+        <p class="small text-white-50 mt-4 mb-0">© 2025 NeoSalud CR — Diseñado con Bootstrap 5.</p>
+      </div>
+      <a href="#" class="scrolltop" id="scrolltop" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></a>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/50660000000?text=Hola%20NeoSalud%2C%20quisiera%20informaci%C3%B3n" class="whatsapp-float" target="_blank" aria-label="Chat WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
