@@ -1,0 +1,31 @@
+@mixin section-clip($h:80px) {
+  position: relative;
+  &:before{
+    content:"";
+    position:absolute;
+    inset:-#{$h} 0 auto 0;
+    height:#{$h};
+    background: $ns-bg-dark;
+    clip-path: polygon(0 0,100% 100%,0 100%);
+  }
+}
+
+@mixin glassy {
+  background: rgba(12,20,38,.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid $ns-border;
+}
+
+@mixin neon-text {
+  color: $ns-neon;
+  text-shadow: 0 0 6px rgba(16,255,132,.7), 0 0 18px rgba(16,255,132,.35);
+}
+
+@mixin ratio($w,$h){
+  aspect-ratio: calc(#{$w} / #{$h});
+}
+
+@mixin hover-scale($s:1.04){
+  transition: transform .35s ease, filter .35s ease;
+  &:hover{ transform: scale($s); }
+}

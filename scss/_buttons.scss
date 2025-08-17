@@ -1,0 +1,27 @@
+.btn-neon{
+  --bs-btn-color: #00110a;
+  --bs-btn-bg: #10ff84;
+  --bs-btn-border-color: #00ef80;
+  --bs-btn-hover-bg: #13ff9a;
+  --bs-btn-hover-border-color: #00ffc0;
+  --bs-btn-focus-shadow-rgb: 16,255,132;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-shadow: 0 0 6px rgba(16,255,132,.7), 0 0 18px rgba(16,255,132,.35);
+  box-shadow: $shadow-soft;
+}
+
+.whatsapp-float{
+  position: fixed; right: 18px; bottom: 78px;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: grid; place-items: center;
+  text-decoration: none;
+  color: #00110a; background: $ns-neon; border:1px solid #00ef80;
+  font-size: 1.875rem;
+  text-shadow: 0 0 6px rgba(16,255,132,.7), 0 0 18px rgba(16,255,132,.35);
+  box-shadow: $shadow-soft;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  z-index: $z-whatsapp;
+  &:hover{ transform: translateY(-3px) scale(1.04); filter: brightness(1.1); }
+}

@@ -1,0 +1,4 @@
+.navbar .nav-link{
+  color: rgba(255,255,255,.75);
+  &.active, &:hover{ color: $ns-neon; }
+}

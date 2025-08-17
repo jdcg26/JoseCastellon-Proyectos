@@ -1,0 +1,11 @@
+.photo-card{
+  position:relative; overflow:hidden; border-radius:$ns-radius; border:1px solid $ns-border;
+  img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.9) contrast(1.1); @include hover-scale(1.06); }
+  figcaption{
+    position:absolute; inset:auto 0 0 0; padding:.6rem .8rem; font-size:.9rem; color:$ns-muted;
+    background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
+  }
+}
+
+.gallery-mural .photo-card{ @include ratio(4,3); overflow:hidden; }
+.gallery-mural .photo-card img{ width:100%; height:100%; object-fit:cover; display:block; }

@@ -1,0 +1,19 @@
+.card-glass{
+  background: $ns-card; border: 1px solid $ns-border; border-radius: $ns-radius;
+  box-shadow: $shadow-card;
+}
+
+.card-product{
+  @extend .card-glass;
+  display:flex; flex-direction:column;
+
+  .card-media { @include ratio(4,5); overflow:hidden; }
+  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; @include hover-scale(1.04); }
+  > .card-img-top{ @include hover-scale(1.04); }
+
+  .card-title{ font-weight:600; }
+  .price{ color:$ns-neon; font-weight:700; }
+
+  .card-body{ display:flex; flex-direction:column; }
+  .card-body .small{ flex-grow:1; }
+}

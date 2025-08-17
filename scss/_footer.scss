@@ -1,0 +1,20 @@
+footer{
+  background: $ns-bg-dark;
+  color: #fff;
+
+  a{ color: $ns-neon; text-decoration:none; }
+  a:hover{ color:#fff; }
+
+  .btn.btn-outline-light{
+    --bs-btn-color:#fff; --bs-btn-border-color: $ns-border;
+  }
+
+  .scrolltop{
+    position:fixed; right:1rem; bottom:1rem;
+    width:44px; height:44px; border-radius:50%;
+    display:grid; place-items:center;
+    background: $ns-card; border:1px solid $ns-border; color:#d7e1ec;
+    opacity:.85; transition: transform .2s ease, opacity .2s;
+    &:hover{ transform: translateY(-2px); opacity:1; }
+  }
+}
